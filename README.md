@@ -14,7 +14,7 @@ A mock shopping cart site in React.
 - In the cart, an item's `quantity` can be changed but cannot be set to 0 or below
 
 #### Goals
-* [ ] Use routing to divide app into an index, a shop inventory, and a shopping cart
+* [x] Use routing to divide app into an index, a shop inventory, and a shopping cart
 * [ ] Ensure functionality of adding and removing items from cart
 * [ ] Populate shop inventory with items from an API
 * [ ] Allow for filtering the shop inventory using a searchbar and controls
