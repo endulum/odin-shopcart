@@ -12,9 +12,9 @@ beforeEach(() => {
 });
 
 describe('App', () => {
-  it('renders', () => {
-    screen.debug();
-  });
+  // it('renders', () => {
+  //   screen.debug();
+  // });
 
   it('can navigate in and out of each page', async () => {
     const user = userEvent.setup();

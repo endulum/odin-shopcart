@@ -21,3 +21,7 @@ A mock shopping cart site in React.
 
 #### Consider...
 - Using a CSS component library to automatically style elements
+
+#### Resources
+- [**Academind:** Testing React.js Apps](https://academind.com/tutorials/testing-react-apps)
+- [**react.dev**: Typechecking with PropTypes](https://legacy.reactjs.org/docs/typechecking-with-proptypes.html#proptypes)
