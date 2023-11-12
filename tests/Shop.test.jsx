@@ -8,15 +8,15 @@ import Shop from '../src/routes/Shop';
 import products from './products';
 
 describe('Shop', () => {
-  it('renders', () => {
-    render(<Shop items={[]} />);
-  });
-
   it('displays all items', () => {
     render(<Shop items={products} />);
-    expect(screen.getAllByRole('listitem').length).toBe(20);
-    expect(screen.getAllByRole('button', { name: 'Add to Cart' }).length).toBe(20);
-    expect(screen.getAllByRole('img').length).toBe(20);
+    expect(screen.queryAllByRole('listitem').length).toBe(20);
+  });
+
+  it('displays message when no items received', () => {
+    render(<Shop />);
+    expect(screen.queryAllByRole('listitem').length).toBe(0);
+    screen.getByText('No items found.');
   });
 });
 
@@ -25,28 +25,21 @@ describe('Shop filtering', () => {
     render(<Shop items={products} />);
     const user = userEvent.setup();
     await user.type(screen.getByLabelText('Item Name'), 'shirt');
-    await user.click(screen.getByRole('button', { name: 'Search' }));
-    expect(screen.getAllByRole('listitem').length).toBe(2);
-    expect(screen.getAllByRole('button', { name: 'Add to Cart' }).length).toBe(2);
-    expect(screen.getAllByRole('img').length).toBe(2);
+    expect(screen.queryAllByRole('listitem').length).toBe(2);
   });
 
   it('can filter for category ("jewelry")', async () => {
     render(<Shop items={products} />);
     const user = userEvent.setup();
     await user.selectOptions(screen.getByTestId('search-category'), 'jewelery');
-    await user.click(screen.getByRole('button', { name: 'Search' }));
-    expect(screen.getAllByRole('listitem').length).toBe(4);
-    expect(screen.getAllByRole('button', { name: 'Add to Cart' }).length).toBe(4);
-    expect(screen.getAllByRole('img').length).toBe(4);
+    expect(screen.queryAllByRole('listitem').length).toBe(4);
   });
 
-  it('can still show all items if nothing was input', async () => {
+  it('displays message when no items fit the filter', async () => {
     render(<Shop items={products} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole('button', { name: 'Search' }));
-    expect(screen.getAllByRole('listitem').length).toBe(20);
-    expect(screen.getAllByRole('button', { name: 'Add to Cart' }).length).toBe(20);
-    expect(screen.getAllByRole('img').length).toBe(20);
+    await user.type(screen.getByLabelText('Item Name'), 'awawawa');
+    screen.getByText('No items found.');
+    expect(screen.queryAllByRole('listitem').length).toBe(0);
   });
 });
