@@ -17,7 +17,7 @@ A mock shopping cart site in React.
 * [x] Use routing to divide app into an index, a shop inventory, and a shopping cart
 * [ ] Ensure functionality of adding and removing items from cart
 * [ ] Populate shop inventory with items from an API
-* [ ] Allow for filtering the shop inventory using a searchbar and controls
+* [x] Allow for filtering the shop inventory using a searchbar and controls
 
 #### Consider...
 - Using a CSS component library to automatically style elements
