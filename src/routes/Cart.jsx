@@ -1,22 +1,52 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import PropTypes from 'prop-types';
 
-export default function Cart({ items }) {
+export default function Cart({ items, dispatch }) {
+  function handleChangeItemQuantity(id, quantity) {
+    dispatch({
+      type: 'change_item_quantity',
+      id,
+      quantity: parseInt(quantity, 10),
+    });
+  }
+
+  function handleRemoveFromCart(id) {
+    dispatch({
+      type: 'remove_from_cart',
+      id,
+    });
+  }
+
   return (
     <div>
+      <p>This is the Cart page.</p>
       {items.length > 0 ? (
         <>
           <ul>
             {items.map((item) => (
               <li key={item.id}>
-                <img src={item.image} alt={item.title} />
-                <p>{item.price}</p>
+                <img src={item.image} alt={item.title} width="100" />
+                <p>
+                  Price:
+                  {' '}
+                  <span>{item.price}</span>
+                </p>
+                <p>
+                  <label htmlFor={`item-quantity-${item.id}`}>Quantity: </label>
+                  <input type="number" id={`item-quantity-${item.id}`} min="1" value={item.quantity} onChange={(e) => handleChangeItemQuantity(item.id, e.target.value)} />
+                </p>
+                <p>
+                  <button type="button" onClick={() => handleRemoveFromCart(item.id)}>Remove from Cart</button>
+                </p>
               </li>
             ))}
           </ul>
           <p>
             Total:
             {' '}
-            <span>{items.reduce((acc, curr) => acc + curr.price, 0).toFixed(2)}</span>
+            <span>
+              {items.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0).toFixed(2)}
+            </span>
           </p>
         </>
 
@@ -36,6 +66,7 @@ Cart.propTypes = {
     isInCart: PropTypes.bool,
     quantity: PropTypes.number,
   })),
+  dispatch: PropTypes.func.isRequired,
 };
 
 Cart.defaultProps = {

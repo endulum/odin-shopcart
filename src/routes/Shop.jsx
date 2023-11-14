@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function Shop({ items }) {
+export default function Shop({ items, dispatch }) {
   const [search, setSearch] = useState({
     title: '',
     category: '',
@@ -21,6 +21,20 @@ export default function Shop({ items }) {
 
   function handleSearchCategory(e) {
     setSearch({ ...search, category: e.target.value });
+  }
+
+  function handleAddToCart(id) {
+    dispatch({
+      type: 'add_to_cart',
+      id,
+    });
+  }
+
+  function handleRemoveFromCart(id) {
+    dispatch({
+      type: 'remove_from_cart',
+      id,
+    });
   }
 
   return (
@@ -50,10 +64,10 @@ export default function Shop({ items }) {
           {filteredItems().map((item) => (
             <li key={item.id} className="item">
               <img src={item.image} alt={item.title} className="item-image" width="100" />
-              {item.isInCart ? (
-                <button type="button">Remove from Cart</button>
+              {item.isInCart && item.quantity > 0 ? (
+                <button type="button" onClick={() => handleRemoveFromCart(item.id)}>Remove from Cart</button>
               ) : (
-                <button type="button">Add to Cart</button>
+                <button type="button" onClick={() => handleAddToCart(item.id)}>Add to Cart</button>
               )}
             </li>
           ))}
@@ -76,6 +90,7 @@ Shop.propTypes = {
     isInCart: PropTypes.bool,
     quantity: PropTypes.number,
   })),
+  dispatch: PropTypes.func.isRequired,
 };
 
 Shop.defaultProps = {

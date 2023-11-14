@@ -24,14 +24,14 @@ describe('Cart sum behavior', () => {
   it('correctly calculates sum of product costs (10 random items)', () => {
     const items = getRandomItems(10);
     render(<Cart items={items} />);
-    const total = items.reduce((acc, curr) => acc + curr.price, 0).toFixed(2);
+    const total = items.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0).toFixed(2);
     screen.getByText(total);
   });
 
   it('correctly calculates sum of product costs (100 random items)', () => {
     const items = getRandomItems(100);
     render(<Cart items={items} />);
-    const total = items.reduce((acc, curr) => acc + curr.price, 0).toFixed(2);
+    const total = items.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0).toFixed(2);
     screen.getByText(total);
   });
 });
