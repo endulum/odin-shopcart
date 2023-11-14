@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function Cart({ items, dispatch }) {
@@ -29,13 +30,19 @@ export default function Cart({ items, dispatch }) {
                 <p>
                   Price:
                   {' '}
-                  <span>{item.price}</span>
+                  <span>
+                    $
+                    {item.price.toFixed(2)}
+                  </span>
                 </p>
                 <p>
                   <label htmlFor={`item-quantity-${item.id}`}>Quantity: </label>
                   <input type="number" id={`item-quantity-${item.id}`} min="1" value={item.quantity} onChange={(e) => handleChangeItemQuantity(item.id, e.target.value)} />
                 </p>
                 <p>
+                  <Link to={`/item/${item.id}`}>
+                    <button type="button">View item</button>
+                  </Link>
                   <button type="button" onClick={() => handleRemoveFromCart(item.id)}>Remove from Cart</button>
                 </p>
               </li>
@@ -45,6 +52,7 @@ export default function Cart({ items, dispatch }) {
             Total:
             {' '}
             <span>
+              $
               {items.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0).toFixed(2)}
             </span>
           </p>

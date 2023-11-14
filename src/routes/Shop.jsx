@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function Shop({ items, dispatch }) {
@@ -64,6 +65,9 @@ export default function Shop({ items, dispatch }) {
           {filteredItems().map((item) => (
             <li key={item.id} className="item">
               <img src={item.image} alt={item.title} className="item-image" width="100" />
+              <Link to={`/item/${item.id}`}>
+                <button type="button">View item</button>
+              </Link>
               {item.isInCart && item.quantity > 0 ? (
                 <button type="button" onClick={() => handleRemoveFromCart(item.id)}>Remove from Cart</button>
               ) : (

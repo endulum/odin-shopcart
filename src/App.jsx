@@ -4,6 +4,7 @@ import { useReducer } from 'react';
 import Layout from './routes/Layout';
 import Index from './routes/Index';
 import Shop from './routes/Shop';
+import Item from './routes/Item';
 import Cart from './routes/Cart';
 import NoMatch from './routes/NoMatch';
 
@@ -36,6 +37,7 @@ export default function App() {
             />
           )}
         />
+        {items.map((item) => <Route key={item.id} path={`/item/${item.id}`} element={<Item item={item} dispatch={dispatch} />} />)}
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
