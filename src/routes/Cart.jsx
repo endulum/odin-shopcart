@@ -7,7 +7,7 @@ export default function Cart({ items, dispatch }) {
     dispatch({
       type: 'change_item_quantity',
       id,
-      quantity: parseInt(quantity, 10),
+      quantity: quantity === '' ? 1 : parseInt(quantity, 10),
     });
   }
 

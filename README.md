@@ -11,13 +11,13 @@ A mock shopping cart site in React.
 - On the Shop page, items are shown with an image, title, category, and price - the title links to a route just for the item
 - Item routes display all item info including description
 - To "add to cart", a shop item's `isInCart` is toggled `true` and its quantity is set to `1`. To "remove from cart, a shop item's `isInCart` is toggled `false` and its `quantity` is set to `0`
-- The cart filters the shop inventory for anything whose `isInCart` is `true`
+- The cart filters the shop inventory for anything whose `isInCart` is `true` and `quantity` is greater than zero
 - The cart sums up the total quantity and price of items
 - In the cart, an item's `quantity` can be changed but cannot be set to 0 or below
 
 #### Goals
 * [x] Use routing to divide app into an index, a shop inventory, and a shopping cart
-* [ ] Ensure functionality of adding and removing items from cart
+* [x] Ensure functionality of adding and removing items from cart
 * [ ] Populate shop inventory with items from an API
 * [x] Allow for filtering the shop inventory using a searchbar and controls
 

@@ -12,7 +12,7 @@ export default function Shop({ items, dispatch }) {
   function filteredItems() {
     return items.filter((item) => (
       (item.title.toLowerCase().includes(search.title) || search.title === '')
-        && (item.category.includes(search.category) || search.category === '')
+        && (item.category === search.category || search.category === '')
     ));
   }
 
