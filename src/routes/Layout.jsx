@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function Layout() {
+export default function Layout({ cartCount }) {
   return (
     <div>
       <nav>
@@ -18,7 +19,9 @@ export default function Layout() {
 
         <Link to="/cart">
           <button type="button">
-            Cart
+            Cart (
+            {cartCount}
+            )
           </button>
         </Link>
       </nav>
@@ -29,3 +32,7 @@ export default function Layout() {
     </div>
   );
 }
+
+Layout.propTypes = {
+  cartCount: PropTypes.number.isRequired,
+};

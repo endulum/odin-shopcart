@@ -14,7 +14,7 @@ import itemsReducer from './itemsReducer';
 
 export default function App() {
   const [loading, error, value] = useFetch('https://fakestoreapi.com/products');
-  const [items, dispatch] = useReducer(itemsReducer, value);
+  const [items, dispatch] = useReducer(itemsReducer, null);
 
   useEffect(() => {
     if (value !== null) {
@@ -23,11 +23,18 @@ export default function App() {
         data: value,
       });
     }
-  }, [loading]);
+  }, [loading, value]);
 
   return items ? (
     <Routes>
-      <Route element={<Layout />}>
+      <Route element={(
+        <Layout cartCount={items.reduce((total, item) => {
+          if (item.isInCart) return total + item.quantity;
+          return total;
+        }, 0)}
+        />
+      )}
+      >
         <Route index element={<Index />} />
         <Route
           path="/shop"
