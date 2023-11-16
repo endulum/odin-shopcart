@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
+import useFetch from './hooks/useFetch';
 
 import Layout from './routes/Layout';
 import Index from './routes/Index';
@@ -8,13 +9,23 @@ import Item from './routes/Item';
 import Cart from './routes/Cart';
 import NoMatch from './routes/NoMatch';
 
-import products from '../tests/products';
+// import products from '../tests/products';
 import itemsReducer from './itemsReducer';
 
 export default function App() {
-  const [items, dispatch] = useReducer(itemsReducer, products);
+  const [loading, error, value] = useFetch('https://fakestoreapi.com/products');
+  const [items, dispatch] = useReducer(itemsReducer, value);
 
-  return (
+  useEffect(() => {
+    if (value !== null) {
+      dispatch({
+        type: 'load_inventory',
+        data: value,
+      });
+    }
+  }, [loading]);
+
+  return items ? (
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Index />} />
@@ -27,7 +38,6 @@ export default function App() {
             />
           )}
         />
-        {/* <Route path="/shop/item/:itemId" /> */}
         <Route
           path="/cart"
           element={(
@@ -41,5 +51,10 @@ export default function App() {
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
+  ) : (
+    <p>
+      {error && `An error has occurred! ${error}`}
+      {loading && 'Loading...'}
+    </p>
   );
 }

@@ -18,7 +18,7 @@ A mock shopping cart site in React.
 #### Goals
 * [x] Use routing to divide app into an index, a shop inventory, and a shopping cart
 * [x] Ensure functionality of adding and removing items from cart
-* [ ] Populate shop inventory with items from an API
+* [x] Populate shop inventory with items from an API
 * [x] Allow for filtering the shop inventory using a searchbar and controls
 
 #### Consider...
