@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import useStorage from '../hooks/useStorage';
 
 export default function Shop({ items, dispatch }) {
-  const [search, setSearch] = useState({
+  const [search, setSearch] = useStorage('search', {
     title: '',
     category: '',
-  });
+  }, window.sessionStorage);
 
   function filteredItems() {
     return items.filter((item) => (
@@ -45,12 +46,12 @@ export default function Shop({ items, dispatch }) {
       <div className="item-search">
         <div>
           <label htmlFor="search-title">Item Name</label>
-          <input type="text" id="search-title" onChange={handleSearchTitle} />
+          <input type="text" id="search-title" defaultValue={search.title} onChange={handleSearchTitle} />
         </div>
 
         <div>
           <label htmlFor="search-category">Item Category</label>
-          <select data-testid="search-category" id="search-category" onChange={handleSearchCategory}>
+          <select data-testid="search-category" id="search-category" defaultValue={search.category} onChange={handleSearchCategory}>
             <option value="">All Categories</option>
             <option value="women's clothing">Women&apos;s Clothing</option>
             <option value="men's clothing">Men&apos;s Clothing</option>
