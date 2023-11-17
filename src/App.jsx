@@ -1,6 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useReducer } from 'react';
+import Typography from '@mui/material/Typography';
 import useFetch from './hooks/useFetch';
+import '@fontsource/roboto';
+import './style.css';
 
 import Layout from './routes/Layout';
 import Index from './routes/Index';
@@ -59,9 +62,13 @@ export default function App() {
       </Route>
     </Routes>
   ) : (
-    <p>
-      {error && `An error has occurred! ${error}`}
-      {loading && 'Loading...'}
-    </p>
+    <main className="loading">
+      <Typography variant="subtitle1">
+        <i>
+          {loading && 'Loading...'}
+          {error && `An error has occurred! ${error}`}
+        </i>
+      </Typography>
+    </main>
   );
 }
