@@ -26,6 +26,12 @@ export default function Cart({ items, dispatch }) {
     });
   }
 
+  const options = {
+    style: 'decimal',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  };
+
   return (
     <main className="cart">
       {items.length > 0 ? (
@@ -72,7 +78,7 @@ export default function Cart({ items, dispatch }) {
               {' '}
               <b>
                 $
-                {items.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0).toFixed(2)}
+                {items.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0).toLocaleString('en-US', options)}
               </b>
             </Typography>
 

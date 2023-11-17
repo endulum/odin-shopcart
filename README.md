@@ -15,15 +15,12 @@ A mock shopping cart site in React.
 - The cart sums up the total quantity and price of items
 - In the cart, an item's `quantity` can be changed but cannot be set to 0 or below
 
+#### Consider
+- Scroll-to-top button
+
 #### Goals
 * [x] Use routing to divide app into an index, a shop inventory, and a shopping cart
 * [x] Ensure functionality of adding and removing items from cart
 * [x] Populate shop inventory with items from an API
 * [x] Allow for filtering the shop inventory using a searchbar and controls
-
-#### Consider...
-- Using a CSS component library to automatically style elements
-
-#### Resources
-- [**Academind:** Testing React.js Apps](https://academind.com/tutorials/testing-react-apps)
-- [**react.dev**: Typechecking with PropTypes](https://legacy.reactjs.org/docs/typechecking-with-proptypes.html#proptypes)
+* [x] Explore Material UI by implementing its components into styling

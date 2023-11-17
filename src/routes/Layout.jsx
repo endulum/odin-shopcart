@@ -9,7 +9,7 @@ export default function Layout({ cartCount }) {
       <nav>
         <ButtonGroup variant="outlined">
           <Link to="/">
-            <Button type="button">
+            <Button type="button" variant="contained" style={{ boxShadow: 'none' }}>
               Home
             </Button>
           </Link>
